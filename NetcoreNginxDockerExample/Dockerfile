@@ -15,6 +15,4 @@ FROM build AS publish
 RUN dotnet publish -c release -r linux-x64 -o "/app/publish" "NetcoreNginxDockerExample.csproj"
 
 FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "NetcoreNginxDockerExample.dll"]
+ENTRYPOINT ["dotnet", "/app/publish/NetcoreNginxDockerExample.dll"]
