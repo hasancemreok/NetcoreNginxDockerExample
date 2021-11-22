@@ -21,4 +21,4 @@ RUN chmod 755 docker.startup.sh
 ENV ASPNETCORE_URLS http://+:5000
 EXPOSE 5000 5001 80
 
-ENTRYPOINT ["sh", "/app/docker.startup.sh"]
+ENTRYPOINT ["sh", "docker.startup.sh"]
