@@ -8,6 +8,7 @@ EXPOSE 5001
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 
 #COPY ["NetcoreNginxDockerExample.csproj", "NetcoreNginxDockerExample/"]
+ADD . .
 COPY . .
 RUN dotnet restore "NetcoreNginxDockerExample.csproj"
 
