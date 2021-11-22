@@ -9,10 +9,10 @@ FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 
 #COPY ["NetcoreNginxDockerExample.csproj", "NetcoreNginxDockerExample/"]
 COPY . .
-RUN dotnet restore "NetcoreNginxDockerExample/NetcoreNginxDockerExample.csproj"
+RUN dotnet restore "NetcoreNginxDockerExample.csproj"
 
 FROM build AS publish
-RUN dotnet publish -c release -r linux-x64 -o "/app/publish" "NetcoreNginxDockerExample/NetcoreNginxDockerExample.csproj"
+RUN dotnet publish -c release -r linux-x64 -o "/app/publish" "NetcoreNginxDockerExample.csproj"
 
 FROM base AS final
 WORKDIR /app
