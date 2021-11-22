@@ -1,4 +1,6 @@
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
+WORKDIR /app
+ENV CURRENT_DIR="/app"
 EXPOSE 80
 EXPOSE 443
 EXPOSE 5000
@@ -6,11 +8,12 @@ EXPOSE 5001
 
 #COPY ["NetcoreNginxDockerExample.csproj", "NetcoreNginxDockerExample/"]
 ADD . .
+COPY . .
 #RUN dotnet restore "NetcoreNginxDockerExample.csproj"
 
-RUN dotnet publish "NetcoreNginxDockerExample.csproj" -c release -r linux-x64 -o "/app/publish"
+RUN dotnet publish "${CURRENT_DIR}/NetcoreNginxDockerExample.csproj" -c release -r linux-x64 -o "${CURRENT_DIR}/publish"
 
-COPY --from=build /app/publish/ /dotnetapp
+COPY --from=build "${CURRENT_DIR}/publish/" "${CURRENT_DIR}/dotnetapp"
 
 FROM base AS final
-ENTRYPOINT ["dotnet", "/dotnetapp/NetcoreNginxDockerExample.dll"]
+ENTRYPOINT ["dotnet", "${CURRENT_DIR}/dotnetapp/NetcoreNginxDockerExample.dll"]
