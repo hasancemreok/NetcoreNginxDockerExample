@@ -1,3 +1,3 @@
 ﻿#!/bin/bash
 service nginx start
-dotnet NetcoreNginxDockerExample.dll
+dotnet /app/NetcoreNginxDockerExample.dll
