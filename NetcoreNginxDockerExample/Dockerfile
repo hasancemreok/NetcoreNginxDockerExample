@@ -18,6 +18,6 @@ COPY --from=build /app/publish/ .
 
 RUN apt-get update && apt-get install -y nginx && rm -rf /var/lib/apt/lists/*
 RUN service nginx stop
-COPY /app/nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/nginx.conf /etc/nginx/conf.d/default.conf
 
 ENTRYPOINT ["sh", "docker.startup.sh"]
