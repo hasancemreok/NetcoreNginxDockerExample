@@ -7,14 +7,12 @@ EXPOSE 5001
 
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /src
-COPY ["NetcoreNginxDockerExample.csproj", "NetcoreNginxDockerExample/"]
+#COPY ["NetcoreNginxDockerExample.csproj", "NetcoreNginxDockerExample/"]
+COPY . .
 RUN dotnet restore "NetcoreNginxDockerExample/NetcoreNginxDockerExample.csproj"
 
-COPY . .
-WORKDIR "/src/NetcoreNginxDockerExample"
-
 FROM build AS publish
-RUN dotnet publish -c release -r linux-x64 -o "/app/publish" "NetcoreNginxDockerExample.csproj"
+RUN dotnet publish -c release -r linux-x64 -o "/app/publish" "/src/NetcoreNginxDockerExample/NetcoreNginxDockerExample.csproj"
 
 FROM base AS final
 WORKDIR /app
