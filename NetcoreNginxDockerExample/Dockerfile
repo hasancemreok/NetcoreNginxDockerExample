@@ -13,6 +13,6 @@ COPY . .
 
 RUN dotnet publish "${CURRENT_DIR}/NetcoreNginxDockerExample.csproj" -c release -r linux-x64 -o "${CURRENT_DIR}/publish"
 
-#COPY --from=build "${CURRENT_DIR}/publish/" "${CURRENT_DIR}/dotnetapp"
+COPY --from=build /app/publish/ /dotnetapp
 
-ENTRYPOINT ["dotnet", "${CURRENT_DIR}/publish/NetcoreNginxDockerExample.dll"]
+ENTRYPOINT ["dotnet", "/dotnetapp/NetcoreNginxDockerExample.dll"]
