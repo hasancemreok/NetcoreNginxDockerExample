@@ -13,7 +13,7 @@ COPY . .
 
 RUN dotnet publish "${CURRENT_DIR}/NetcoreNginxDockerExample.csproj" -c release -r linux-x64 -o "${CURRENT_DIR}/publish"
 
-FROM nginx:latest
+FROM mcr.microsoft.com/dotnet/aspnet:3.1
 COPY --from=build /app/publish/ .
 
 ENTRYPOINT ["dotnet", "NetcoreNginxDockerExample.dll"]
