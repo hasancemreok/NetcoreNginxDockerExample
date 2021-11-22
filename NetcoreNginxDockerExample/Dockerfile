@@ -14,7 +14,6 @@ COPY . .
 FROM build AS publish
 RUN dotnet publish "${CURRENT_DIR}/NetcoreNginxDockerExample.csproj" -c release -r linux-x64 -o "${CURRENT_DIR}/publish"
 
-FROM base AS final
 WORKDIR /dotnetapp
 COPY --from=publish /app/publish/ .
 
