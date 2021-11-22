@@ -17,6 +17,6 @@ FROM mcr.microsoft.com/dotnet/aspnet:3.1
 COPY --from=build /app/publish/ .
 
 FROM nginx:1.18.0
-COPY --from=build /nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/nginx.conf /etc/nginx/conf.d/default.conf
 
 ENTRYPOINT ["sh", "docker.startup.sh"]
