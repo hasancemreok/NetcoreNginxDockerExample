@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y nginx && rm -rf /var/lib/apt/lists/*
 COPY --from=build /app/nginx.conf /etc/nginx/conf.d/default.conf
 
 COPY "docker.startup.sh" .
-RUN chmod 755 /app/docker.startup.sh
+RUN chmod 755 docker.startup.sh
  
 ENV ASPNETCORE_URLS http://+:5000
 EXPOSE 5000 5001 80
