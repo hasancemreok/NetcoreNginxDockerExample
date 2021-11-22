@@ -12,7 +12,9 @@ COPY . .
 RUN dotnet restore "NetcoreNginxDockerExample.csproj"
 
 FROM build AS publish
-RUN dotnet publish -c release -r linux-x64 -o "/app/publish" "NetcoreNginxDockerExample.csproj"
+RUN dotnet publish "NetcoreNginxDockerExample.csproj" -c release -r linux-x64 -o "/app/publish"
+
+COPY --from=publish /app/publish/ /dotnetapp
 
 FROM base AS final
-ENTRYPOINT ["dotnet", "/app/publish/NetcoreNginxDockerExample.dll"]
+ENTRYPOINT ["dotnet", "/dotnetapp/NetcoreNginxDockerExample.dll"]
