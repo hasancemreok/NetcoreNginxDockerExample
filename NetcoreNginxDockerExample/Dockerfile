@@ -13,7 +13,7 @@ COPY . .
 WORKDIR "/src/NetcoreNginxDockerExample"
 
 FROM build AS publish
-RUN dotnet publish "NetcoreNginxDockerExample.csproj" -c Release -r linux-64 -o /app/publish
+RUN dotnet publish "NetcoreNginxDockerExample.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
