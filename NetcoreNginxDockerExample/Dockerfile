@@ -13,7 +13,6 @@ FROM mcr.microsoft.com/dotnet/aspnet:3.1
 COPY --from=build /app/publish/ .
 
 RUN apt-get update && apt-get install -y nginx && rm -rf /var/lib/apt/lists/*
-RUN rm /etc/nginx/nginx.conf
 COPY --from=build /app/nginx.conf /etc/nginx/
 
 COPY "docker.startup.sh" .
